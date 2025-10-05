@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wallet/screens/onboarding._screen.dart';
 import 'package:wallet/services/user_data.dart';
 import 'package:wallet/widget/wrapper.dart';
 
