@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wallet/constants/appColor.dart';
 import 'package:wallet/constants/appPadding.dart';
+import 'package:wallet/services/user_data.dart';
 import 'package:wallet/widget/custom_button_widget.dart';
 import 'package:wallet/widget/custome_text_form_widget.dart';
 
@@ -101,8 +102,21 @@ class _UserDataScreenState extends State<UserDataScreen> {
                       ),
                       SizedBox(height: 40),
                       GestureDetector(
-                        onTap: () {
+                        onTap: () async {
                           if (_formKey.currentState!.validate()) {
+                            String username = _nameController.text;
+                            String email = _emailController.text;
+                            String password = _passwordController.text;
+                            String confirmPassword =
+                                _confirmPasswordController.text;
+
+                            await UserDataService.storeUserDetails(
+                              username: username,
+                              email: email,
+                              password: password,
+                              confirmPassword: confirmPassword,
+                              context: context,
+                            );
                           } else {}
                         },
                         child: CustomButtonWidget(
