@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserDataService {
-  // Store user details using share preferences
-
+  // *** Store user details using share preferences ***
   static Future<void> storeUserDetails({
     required String username,
     required String email,
@@ -29,10 +28,18 @@ class UserDataService {
       await preferences.setString('email', email);
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('User Details Stored Successfully')),
+        SnackBar(content: Text('User Details Stored Successfuly')),
       );
     } catch (e) {
       e.toString();
     }
+  }
+
+  // *** Check if the username is stored in share preferences ***
+  Future<bool> CheckSavedUser() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+
+    String? userName = preferences.getString('username');
+    return userName != null;
   }
 }
