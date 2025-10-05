@@ -15,11 +15,10 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
+  PageController _controller = PageController();
+  bool showPage = false;
   @override
   Widget build(BuildContext context) {
-    PageController _controller = PageController();
-    bool showPage = false;
-
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
