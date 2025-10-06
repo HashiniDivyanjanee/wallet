@@ -11,8 +11,16 @@ class _AddNewScreenState extends State<AddNewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Add New Screen'),
+      body: SafeArea(
+        child: SingleChildScrollView(child: Stack(children: [
+          Row(
+            children: [
+              Text('Income'),
+              Text('Expenses')
+            ],
+          )
+        ],
+      )),
       ),
     );
   }
