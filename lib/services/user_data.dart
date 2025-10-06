@@ -42,4 +42,13 @@ class UserDataService {
     String? userName = preferences.getString('username');
     return userName != null;
   }
+
+
+// *** Fetch User Details ***
+  static Future<Map<String, String>> fetchUserDedatils() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String? username = preferences.getString('username');
+    String? email = preferences.getString('email');
+    return {'username': username!, 'email': email!};
+  }
 }
