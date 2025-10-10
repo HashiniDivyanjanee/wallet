@@ -145,7 +145,7 @@ class _AddNewScreenState extends State<AddNewScreen> {
                           items: IncomeCategoryColor.values.map((category) {
                             return DropdownMenuItem(
                               value: category,
-                              child: Text(category.    
+                              child: Text(category.toString()   
                               ),
                             );
                           }).toList(),
