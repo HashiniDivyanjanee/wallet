@@ -1,6 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:wallet/constants/appColor.dart';
 import 'package:wallet/constants/appPadding.dart';
+import 'package:wallet/model/income.dart';
 
 class AddNewScreen extends StatefulWidget {
   const AddNewScreen({super.key});
@@ -44,8 +47,8 @@ class _AddNewScreenState extends State<AddNewScreen> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(100),
                               color: _selected == 1
-                                  ?AppWhiteColor
-                                  : AppGreenColor
+                                  ? AppWhiteColor
+                                  : AppGreenColor,
                             ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
@@ -73,8 +76,8 @@ class _AddNewScreenState extends State<AddNewScreen> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(100),
                               color: _selected == 0
-                                  ?AppWhiteColor
-                                  : AppRedColor
+                                  ? AppWhiteColor
+                                  : AppRedColor,
                             ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
@@ -91,6 +94,62 @@ class _AddNewScreenState extends State<AddNewScreen> {
                               ),
                             ),
                           ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: defalutPadding,
+                  ),
+                  child: Container(
+                    margin: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.1,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'How much?',
+                          style: TextStyle(
+                            fontSize: 22,
+                            color: AppWhiteColor.withOpacity(0.8),
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        TextField(
+                          style: TextStyle(fontSize: 55),
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            hintText: '0',
+                            hintStyle: TextStyle(color: AppWhiteColor),
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.28,
+                  ),
+                  width: double.infinity,
+
+                  color: AppWhiteColor,
+                  child: Form(
+                    child: Column(
+                      children: [
+                        DropdownButtonFormField(
+                          items: IncomeCategoryColor.values.map((category) {
+                            return DropdownMenuItem(
+                              value: category,
+                              child: Text(category.    
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (value) {},
                         ),
                       ],
                     ),
