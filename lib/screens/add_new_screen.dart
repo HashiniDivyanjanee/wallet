@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:wallet/constants/appColor.dart';
 import 'package:wallet/constants/appPadding.dart';
 import 'package:wallet/model/expenses.dart';
 import 'package:wallet/model/income.dart';
+import 'package:wallet/widget/custom_button_widget.dart';
 import 'package:wallet/widget/custome_text_form_widget.dart';
 
 class AddNewScreen extends StatefulWidget {
@@ -20,6 +22,9 @@ class _AddNewScreenState extends State<AddNewScreen> {
   TextEditingController _descriptionController = TextEditingController();
   TextEditingController _amountController = TextEditingController();
 
+  DateTime _selectedDate = DateTime.now();
+  DateTime _selectedTime = DateTime.now();
+
   @override
   void dispose() {
     _titleController.dispose();
@@ -36,6 +41,8 @@ class _AddNewScreenState extends State<AddNewScreen> {
         child: SingleChildScrollView(
           child: Stack(
             children: [
+
+              // ** Income and Expenses moving section **
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: defalutPadding,
@@ -50,6 +57,8 @@ class _AddNewScreenState extends State<AddNewScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+
+                      // Income Button
                       GestureDetector(
                         onTap: () {
                           setState(() {
@@ -79,6 +88,8 @@ class _AddNewScreenState extends State<AddNewScreen> {
                           ),
                         ),
                       ),
+
+                      // Expenses Button
                       GestureDetector(
                         onTap: () {
                           setState(() {
@@ -92,7 +103,7 @@ class _AddNewScreenState extends State<AddNewScreen> {
                           ),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                              vertical: defalutPadding,
+                              vertical: 10,
                               horizontal: 60,
                             ),
                             child: Text(
@@ -143,6 +154,8 @@ class _AddNewScreenState extends State<AddNewScreen> {
                   ),
                 ),
               ),
+
+              // Income and Expenses details Added Section
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
@@ -162,6 +175,8 @@ class _AddNewScreenState extends State<AddNewScreen> {
                     horizontal: defalutPadding,
                     vertical: 40,
                   ),
+
+                  // Details Add form
                   child: Form(
                     child: Column(
                       children: [
@@ -204,6 +219,128 @@ class _AddNewScreenState extends State<AddNewScreen> {
                           fieldName: 'Amount',
                           controller: _amountController,
                           keyboardType: TextInputType.number,
+                        ),
+                        SizedBox(height: 30),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+
+                            // Select Date Section
+                            GestureDetector(
+                              onTap: () {
+                                showDatePicker(
+                                  context: context,
+                                  firstDate: DateTime(2020),
+                                  lastDate: DateTime(2026),
+                                ).then((value) {
+                                  if (value != null) {
+                                    setState(() {
+                                      _selectedDate = value;
+                                    });
+                                  }
+                                });
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: const Color.fromARGB(255, 119, 119, 119),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 30,
+                                    vertical: 10,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.calendar_month_outlined,
+                                        size: 28,
+                                        color: AppWhiteColor,
+                                      ),
+                                      SizedBox(width: 10),
+                                      Text(
+                                        'Select Date',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: AppWhiteColor,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Text(DateFormat.yMMMMd().format(_selectedDate)),
+                          ],
+                        ),
+                        SizedBox(height: 15),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+
+                            // Select Time Section
+                            GestureDetector(
+                              onTap: () {
+                                showTimePicker(
+                                  context: context,
+                                  initialTime: TimeOfDay.now(),
+                                ).then((value) {
+                                  if (value != null) {
+                                    setState(() {
+                                      _selectedTime = DateTime(
+                                        _selectedDate.year,
+                                        _selectedDate.month,
+                                        _selectedDate.day,
+                                        value.hour,
+                                        value.minute,
+                                      );
+                                    });
+                                  }
+                                });
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: const Color.fromARGB(255, 150, 150, 150),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 30,
+                                    vertical: 10,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.calendar_month_outlined,
+                                        size: 28,
+                                        color: AppWhiteColor,
+                                      ),
+                                      SizedBox(width: 10),
+                                      Text(
+                                        'Select Time',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: AppWhiteColor,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Text(DateFormat.jm().format(_selectedTime)),
+                          ],
+                        ),
+                        SizedBox(height: 40),
+
+                        // Add Button
+                        CustomButtonWidget(
+                          btnName: 'Add',
+                          btnColor: _selected == 0
+                              ? AppGreenColor
+                              : AppRedColor,
                         ),
                       ],
                     ),
