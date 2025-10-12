@@ -25,7 +25,7 @@ class CustomeTextFormWidget extends StatelessWidget {
       obscureText: obscueText,
       decoration: InputDecoration(
         hintText: fieldName,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(100)),
         contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 18),
       ),
     );
